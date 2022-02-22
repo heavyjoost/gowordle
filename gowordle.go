@@ -22,6 +22,7 @@ var (
     re = regexp.MustCompile(pattern)
     words []string
     idx = 0
+    gameActive = false
 )
 
 type ircformatting string
@@ -79,7 +80,16 @@ func colorify(text string, fg irccolor, bg irccolor) string {
     }
 }
 
+func wordle(command *bot.Cmd) (string, error) {
+    gameActive = !gameActive
+    return strings.Repeat("_ ", len(words[idx])), nil
+}
+
 func gowordle(command *bot.PassiveCmd) (string, error) {
+    if !gameActive {
+        return "", nil
+    }
+    
     input := strings.TrimRight(command.MessageData.Text, " \r\n")
     
     // We only care about what somebody says if it matches the length of the word
@@ -155,4 +165,5 @@ func init() {
     })
     
     bot.RegisterPassiveCommand("gowordle", gowordle)
+    bot.RegisterCommand("wordle", "Play wordle", "wordle", wordle)
 }
