@@ -1,0 +1,1 @@
+To run do something like this: env IRC_SERVER=myserver:6697 IRC_CHANNELS='#mychannel' IRC_USER='myuser' IRC_NICK='mynick' go run .
