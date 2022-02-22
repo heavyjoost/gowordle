@@ -165,5 +165,5 @@ func init() {
     })
     
     bot.RegisterPassiveCommand("gowordle", gowordle)
-    bot.RegisterCommand("wordle", "Play wordle", "wordle", wordle)
+    bot.RegisterCommand("wordle", "Play wordle", "", wordle)
 }
